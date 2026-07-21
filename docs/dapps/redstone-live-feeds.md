@@ -217,15 +217,13 @@ If no pong is received the server closes the connection with code `1001`. Reconn
 ## Limits
 
 - Connections are forcibly closed after **8 hours** (code `1006`) regardless of activity. Clients must handle this close event and reconnect.
-- 1 req/s per connection with bursts up to 20 req, more requests result in connection closing with code 1008
-- There is an outgoing buffer of 1MB per connection, if a consumer is slow and the buffer fills up, they are disconnected.
-- Messages from a subscriber, larger than 64Kb are dropped
-
-> **Abuse handling:** RedStone continuously monitors usage. API keys that repeatedly exceed these limits may be throttled, have connections closed, or be rejected entirely (`HTTP 401`/`403`). Design clients to stay within the limits and to reconnect with backoff.
+- **1 req/s** per connection with bursts up to **20** req, more requests result in connection closing with code `1008`.
+- There is an outgoing buffer of **1MB** per connection, if a consumer is slow and the buffer fills up, they are disconnected.
+- Messages from a subscriber, larger than **64Kb** are dropped.
 
 ### Coming August 21, 2026
 
 The following limits are being introduced on this date. Until then, connections that exceed them keep working. Review your client ahead of time so it stays within them.
 
-- Connection-open rate: each WebSocket connection is opened with a single HTTP upgrade request. These are rate-limited to **60 requests/minute** per client IP and per API key (`x-api-key`), rejected with `HTTP 403`; and to **10 upgrades/second per API key** with short bursts up to **30**, rejected with `HTTP 429`.
+- Connection-open rate: each WebSocket connection is opened with a single HTTP upgrade request. These are rate-limited to **60 requests/minute** per client IP and per API key, rejected with `HTTP 403`; and to **10 upgrades/second per API key** with short bursts up to **30**, rejected with `HTTP 429`.
 - Topics per connection: up to **50** distinct topics per connection. A subscribe that would exceed this is rejected with a `TOPIC_LIMIT_EXCEEDED` [error frame](#error). The connection and existing subscriptions stay intact. Open an additional connection to subscribe to more feeds.
