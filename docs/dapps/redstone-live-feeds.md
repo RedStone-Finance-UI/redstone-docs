@@ -216,6 +216,7 @@ If no pong is received the server closes the connection with code `1001`. Reconn
 
 ## Limits
 
+- Up to **30** concurrent connections per API key. Attempts to open more are rejected with `HTTP 429`.
 - Connections are forcibly closed after **8 hours** (code `1006`) regardless of activity. Clients must handle this close event and reconnect.
 - **1 req/s** per connection with bursts up to **20** req, more requests result in connection closing with code `1008`.
 - There is an outgoing buffer of **1MB** per connection, if a consumer is slow and the buffer fills up, they are disconnected.
