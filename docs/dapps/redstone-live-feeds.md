@@ -14,11 +14,11 @@ Open a WebSocket connection and include your API key in the HTTP upgrade request
 x-api-key: <your-api-key>
 ```
 
-| Response          | Meaning                                                          |
-| ----------------- | ---------------------------------------------------------------- |
-| `HTTP 101`        | Connection accepted                                              |
-| `HTTP 401 or 403` | Missing or invalid API key                                       |
-| `HTTP 429`        | Per-key connection limit reached (max 30 concurrent connections) |
+| Response          | Meaning                                                                                    |
+| ----------------- | ------------------------------------------------------------------------------------------ |
+| `HTTP 101`        | Connection accepted                                                                        |
+| `HTTP 401 or 403` | Missing or invalid API key                                                                 |
+| `HTTP 429`        | Rate or connection limit reached (see [Limits](#limits)) - back off and retry with jitter. |
 
 ---
 
@@ -157,6 +157,34 @@ One [SignedDataPackagePlainObj](https://github.com/redstone-finance/redstone-ora
 
 ---
 
+### `error`
+
+Sent when a request cannot be fulfilled but the connection stays open. The server replies with an error frame on the same connection.
+
+```jsonc
+{
+  "type": "error",
+  "code": "TOPIC_LIMIT_EXCEEDED",
+  "message": "Subscribe rejected: exceeds the 50-topic limit for this connection",
+  "limit": 50,
+}
+```
+
+| Field     | Type      | Required | Description                                  |
+| --------- | --------- | -------- | -------------------------------------------- |
+| `type`    | `"error"` | Yes      | Discriminant field                           |
+| `code`    | `string`  | Yes      | Machine-readable error code                  |
+| `message` | `string`  | Yes      | Human-readable description                   |
+| `limit`   | `number`  | No       | The limit that was exceeded, when applicable |
+
+**Error codes:**
+
+| `code`                 | Cause                                                                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `TOPIC_LIMIT_EXCEEDED` | The subscribe would exceed the per-connection topic limit. The request is rejected; existing subscriptions and the connection stay intact. |
+
+---
+
 ## Parsing messages
 
 Use the `type` field to distinguish message kinds on the client side:
@@ -168,6 +196,8 @@ ws.on("message", (raw) => {
     console.log(msg.dataPackageId, msg.value);
   } else if (msg.type === "redstonePackages") {
     console.log(msg.dataPackageId, msg.payloads.length, "signers");
+  } else if (msg.type === "error") {
+    console.warn(msg.code, msg.message);
   } else if (msg.dataPackageId) {
     console.log(msg.dataPackageId, msg.timestampMilliseconds, msg.signature);
   }
@@ -186,7 +216,15 @@ If no pong is received the server closes the connection with code `1001`. Reconn
 
 ## Limits
 
+- Up to **30** concurrent connections per API key. Attempts to open more are rejected with `HTTP 429`.
 - Connections are forcibly closed after **8 hours** (code `1006`) regardless of activity. Clients must handle this close event and reconnect.
-- 1 req/s per connection with bursts up to 20 req, more requests result in connection closing with code 1008
-- There is an outgoing buffer of 1MB per connection, if a consumer is slow and the buffer fills up, they are disconnected.
-- Messages from a subscriber, larger than 64Kb are dropped
+- **1 req/s** per connection with bursts up to **20** req, more requests result in connection closing with code `1008`.
+- There is an outgoing buffer of **1MB** per connection, if a consumer is slow and the buffer fills up, they are disconnected.
+- Messages from a subscriber, larger than **64Kb** are dropped.
+
+### Coming August 21, 2026
+
+The following limits are being introduced on this date. Until then, connections that exceed them keep working. Review your client ahead of time so it stays within them.
+
+- Connection-open rate: each WebSocket connection is opened with a single HTTP upgrade request. These are rate-limited to **60 requests/minute** per client IP and per API key, rejected with `HTTP 403`; and to **10 upgrades/second per API key** with short bursts up to **30**, rejected with `HTTP 429`.
+- Topics per connection: up to **50** distinct topics per connection. A subscribe that would exceed this is rejected with a `TOPIC_LIMIT_EXCEEDED` [error frame](#error). The connection and existing subscriptions stay intact. Open an additional connection to subscribe to more feeds.
