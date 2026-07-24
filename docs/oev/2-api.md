@@ -11,7 +11,7 @@ and simulate the effect of a hypothetical feed price on position health before a
 
 ## 1. Connection Requirements
 
-**Base URL**: `https://<url>.oev.a.redstone.finance/morpho/v1`
+**Base URL**: `https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1`
 
 ### Authentication
 
@@ -28,24 +28,7 @@ RedStone.
 
 ## 2. Endpoints
 
-### 2.1 Health check
-
-`GET /health`
-
-A simple liveness probe. Returns `200 OK` when the service is up.
-
-```bash
-curl -s https://<url>.oev.a.redstone.finance/morpho/v1/health \
-  -H "x-api-key: <your-api-key>"
-```
-
-**Response:**
-
-```json
-{ "status": "ok" }
-```
-
-### 2.2 At-risk positions
+### 2.1 At-risk positions
 
 `GET /positions/at-risk`
 
@@ -53,7 +36,7 @@ Returns the tracked positions with an open borrow, ranked by `current_ltv` desce
 The number of results is capped by the service configuration (100 by default).
 
 ```bash
-curl -s https://<url>.oev.a.redstone.finance/morpho/v1/positions/at-risk \
+curl -s https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/positions/at-risk \
   -H "x-api-key: <your-api-key>"
 ```
 
@@ -80,7 +63,7 @@ curl -s https://<url>.oev.a.redstone.finance/morpho/v1/positions/at-risk \
 
 `current_ltv` is expressed as a percentage of the market's LLTV — a value `>= 100` means the position is liquidatable.
 
-### 2.3 Markets
+### 2.2 Markets
 
 `GET /markets`
 
@@ -88,7 +71,7 @@ Returns every tracked market together with its full oracle configuration (feeds,
 `convertToAssets` vault values used to reconstruct the oracle price).
 
 ```bash
-curl -s https://<url>.oev.a.redstone.finance/morpho/v1/markets \
+curl -s https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/markets \
   -H "x-api-key: <your-api-key>"
 ```
 
@@ -149,7 +132,7 @@ on-chain address instead, and a zero-address feed slot has a `null` symbol. `bas
 `null` when the corresponding vault is the zero address (the oracle price then uses the conversion sample directly).
 :::
 
-### 2.4 Markets by borrower
+### 2.3 Markets by borrower
 
 `GET /markets/borrower/{borrower}`
 
@@ -161,7 +144,7 @@ the borrower's own position (collateral, borrow, current LTV).
 | `borrower`     | Borrower wallet address (case-insensitive)    |
 
 ```bash
-curl -s https://<url>.oev.a.redstone.finance/morpho/v1/markets/borrower/0x629d764ec8563afa701709b52c1a215e865632de \
+curl -s https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/markets/borrower/0x629d764ec8563afa701709b52c1a215e865632de \
   -H "x-api-key: <your-api-key>"
 ```
 
@@ -204,7 +187,7 @@ curl -s https://<url>.oev.a.redstone.finance/morpho/v1/markets/borrower/0x629d76
 
 An empty `markets` array means the borrower has no tracked positions.
 
-### 2.5 Simulate a feed price
+### 2.4 Simulate a feed price
 
 `POST /simulate`
 
@@ -216,12 +199,12 @@ move would put at risk — without waiting for a live auction.
 
 | Field       | Type       | Required | Description                                                                           |
 | ----------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
-| `feedId`    | `string`   | yes      | RedStone feed id / symbol to override (e.g. `ETH`).                                    |
+| `feedId`    | `string`   | yes      | Feed identifier to override. For RedStone feeds this is the feed id / symbol (e.g. `ETH`). For non-RedStone feeds it is the feed's on-chain address (e.g. `0x6beE2D4dC04afb93b8117849138aA4fCa300c788`) — this matches the `symbol` field returned by the `/markets` endpoint for that feed. |
 | `value`     | `string`   | yes      | Raw feed value as an integer string, same units as the stored feed values (8 decimals). Must be `> 0`. |
 | `borrowers` | `string[]` | no       | Restrict the simulation to these borrower addresses.                                  |
 
 ```bash
-curl -s -X POST https://<url>.oev.a.redstone.finance/morpho/v1/simulate \
+curl -s -X POST https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/simulate \
   -H "x-api-key: <your-api-key>" \
   -H "content-type: application/json" \
   -d '{
@@ -247,9 +230,21 @@ curl -s -X POST https://<url>.oev.a.redstone.finance/morpho/v1/simulate \
 }
 ```
 
+For a **non-RedStone feed**, pass its on-chain address as `feedId` instead of a symbol:
+
+```bash
+curl -s -X POST https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/simulate \
+  -H "x-api-key: <your-api-key>" \
+  -H "content-type: application/json" \
+  -d '{
+    "feedId": "0x6beE2D4dC04afb93b8117849138aA4fCa300c788",
+    "value": "150000000000"
+  }'
+```
+
 - `current_ltv` is the last indexed LTV; `simulated_ltv` is the LTV recomputed with the supplied `feedId`/`value`.
 - Positions are sorted by `simulated_ltv` descending and capped by the service result limit.
-- If no oracle uses `feedId`, an empty `positions` array is returned.
+- If no oracle uses `feedId` (unknown symbol or address), an empty `positions` array is returned.
 
 **Error responses:**
 
