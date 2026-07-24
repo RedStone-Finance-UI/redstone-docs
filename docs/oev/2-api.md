@@ -139,9 +139,9 @@ on-chain address instead, and a zero-address feed slot has a `null` symbol. `bas
 Returns every market in which the given borrower currently holds a position, with the market and oracle metadata plus
 the borrower's own position (collateral, borrow, current LTV).
 
-| Path parameter | Description                                   |
-| -------------- | --------------------------------------------- |
-| `borrower`     | Borrower wallet address (case-insensitive)    |
+| Path parameter | Description                                |
+| -------------- | ------------------------------------------ |
+| `borrower`     | Borrower wallet address (case-insensitive) |
 
 ```bash
 curl -s https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/markets/borrower/0x629d764ec8563afa701709b52c1a215e865632de \
@@ -197,11 +197,11 @@ move would put at risk — without waiting for a live auction.
 
 **Request body:**
 
-| Field       | Type       | Required | Description                                                                           |
-| ----------- | ---------- | -------- | ------------------------------------------------------------------------------------- |
+| Field       | Type       | Required | Description                                                                                                                                                                                                                                                                                  |
+| ----------- | ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `feedId`    | `string`   | yes      | Feed identifier to override. For RedStone feeds this is the feed id / symbol (e.g. `ETH`). For non-RedStone feeds it is the feed's on-chain address (e.g. `0x6beE2D4dC04afb93b8117849138aA4fCa300c788`) — this matches the `symbol` field returned by the `/markets` endpoint for that feed. |
-| `value`     | `string`   | yes      | Raw feed value as an integer string, same units as the stored feed values (8 decimals). Must be `> 0`. |
-| `borrowers` | `string[]` | no       | Restrict the simulation to these borrower addresses.                                  |
+| `value`     | `string`   | yes      | Raw feed value as an integer string, same units as the stored feed values (8 decimals). Must be `> 0`.                                                                                                                                                                                       |
+| `borrowers` | `string[]` | no       | Restrict the simulation to these borrower addresses.                                                                                                                                                                                                                                         |
 
 ```bash
 curl -s -X POST https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api/morpho/v1/simulate \
@@ -253,7 +253,10 @@ curl -s -X POST https://<url>.execute-api.eu-central-1.amazonaws.com/oev-eth-api
 ```
 
 ```json
-{ "statusCode": 400, "message": "value must be an integer string (raw feed value, same units as stored feed values)" }
+{
+  "statusCode": 400,
+  "message": "value must be an integer string (raw feed value, same units as stored feed values)"
+}
 ```
 
 ## 3. Field reference
