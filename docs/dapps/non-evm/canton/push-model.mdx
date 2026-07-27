@@ -30,13 +30,13 @@ at the cost of persistent contract state.
 
 The main oracle contract, persisting the aggregated feed data. Its main choices:
 
-| Choice          | Kind       | Description                                                                                                              |
-| --------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `GetPrices`               | read-only  | Processes a payload passed in the call and returns aggregated prices — the Pull path, also available on the adapter.       |
-| `WritePrices`             | writing    | Processes a payload and persists the aggregated values; creates `PricePill`s when a factory is configured. Caller must be an updater. |
-| `ReadPrices`              | read-only  | Returns the stored aggregated values for the requested feeds.                                                             |
-| `ReadPriceData`           | read-only  | Returns the stored value, data timestamp and write timestamp per feed (`None` for feeds not written yet).                 |
-| `GetUniqueSignerThreshold`| read-only  | Returns the minimum number of unique signers required for data to be accepted.                                            |
+| Choice                     | Kind      | Description                                                                                                                           |
+| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `GetPrices`                | read-only | Processes a payload passed in the call and returns aggregated prices — the Pull path, also available on the adapter.                  |
+| `WritePrices`              | writing   | Processes a payload and persists the aggregated values; creates `PricePill`s when a factory is configured. Caller must be an updater. |
+| `ReadPrices`               | read-only | Returns the stored aggregated values for the requested feeds.                                                                         |
+| `ReadPriceData`            | read-only | Returns the stored value, data timestamp and write timestamp per feed (`None` for feeds not written yet).                             |
+| `GetUniqueSignerThreshold` | read-only | Returns the minimum number of unique signers required for data to be accepted.                                                        |
 
 All read choices verify that the caller is a viewer or an updater.
 
