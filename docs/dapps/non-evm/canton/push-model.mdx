@@ -1,0 +1,65 @@
+---
+sidebar_position: 2
+sidebar_label: "Push Model"
+---
+
+# Canton — Push Model
+
+In the RedStone Push model, price data is persisted on the Canton ledger. An off-chain relayer periodically
+calls the `WritePrices` choice on an **adapter** contract, which processes the RedStone payload, verifies the
+signatures and timestamps, and stores the aggregated values on the ledger. Consumers can then read the latest
+prices at any time without supplying a payload themselves.
+
+Unlike the [Pull Model](./pull-model.mdx), the Push model keeps oracle values available on the ledger between updates,
+at the cost of persistent contract state.
+
+## Data flow
+
+1. An off-chain relayer fetches a signed RedStone payload from RedStone’s Data Distribution Layer.
+2. The relayer submits the payload to the adapter’s `WritePrices` choice.
+3. The Daml logic verifies signatures, checks timestamps, and aggregates the values.
+4. Only values with a newer data timestamp than what is already stored are written. If nothing is newer,
+   the call is a no-op and leaves the state unchanged.
+5. Each write archives the current adapter contract and creates a new one with the updated data — its contract ID changes.
+6. When a `PricePillFactory` is configured, the write also creates an individual `PricePill` contract per feed,
+   so a consumer can read a single feed without accessing the adapter directly.
+
+## Smart contracts
+
+### Adapter
+
+The main oracle contract, persisting the aggregated feed data. Its main choices:
+
+| Choice                     | Kind      | Description                                                                                                                           |
+| -------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `GetPrices`                | read-only | Processes a payload passed in the call and returns aggregated prices — the Pull path, also available on the adapter.                  |
+| `WritePrices`              | writing   | Processes a payload and persists the aggregated values; creates `PricePill`s when a factory is configured. Caller must be an updater. |
+| `ReadPrices`               | read-only | Returns the stored aggregated values for the requested feeds.                                                                         |
+| `ReadPriceData`            | read-only | Returns the stored value, data timestamp and write timestamp per feed (`None` for feeds not written yet).                             |
+| `GetUniqueSignerThreshold` | read-only | Returns the minimum number of unique signers required for data to be accepted.                                                        |
+
+All read choices verify that the caller is a viewer or an updater.
+
+### PricePill
+
+An individual contract holding a snapshot of a single feed’s price data, created by the `PricePillFactory`
+during `WritePrices`. It lets consumers read one feed in isolation — `ReadPrice`, `ReadData`, `ReadTimestamp`,
+`ReadFeedId`, `ReadDescription` — and report whether its data is stale via `IsDataStale`.
+
+## PricePill lifecycle
+
+1. **Creation** — a pill is created during `WritePrices` with the latest data and a staleness window
+   (`pill_staleness_ms` = 1 day).
+2. **Active period** — the pill is readable while it is not stale. It becomes stale once the ledger time passes
+   `packageTimestamp + stalenessMs` (measured from the data timestamp). `ReadData` and `ReadPrice` refuse to return
+   stale data.
+3. **Retention** — the adapter always keeps the **2 newest pills per feed** regardless of age. Older pills are
+   “demoted” on a write and archived on a later `WritePrices` call once more than `pill_keep_ms` (1 minute) has
+   elapsed since demotion.
+4. **Archival** — old pills are archived by the factory; only the updater party may archive them.
+
+## Full reference
+
+See the complete Push oracle documentation — every choice with its parameters, the PricePill lifecycle and the
+possible transaction failures — in the
+[`canton-connector` adapter README](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/canton-connector/daml/adapter/README.md).

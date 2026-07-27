@@ -1,0 +1,34 @@
+---
+sidebar_position: 1
+sidebar_label: "Pull Model"
+---
+
+# Canton — Pull Model
+
+The RedStone Pull model integrates naturally with the Canton network’s architecture, enabling dApps to access fresh,
+verifiable data without introducing persistent on-ledger storage.
+
+Since oracle data is supplied directly within a transaction rather than published on-chain,
+the data remains visible only to the parties executing it.
+The synchronizer simply routes the payload without learning anything about it,
+making RedStone oracle updates fully compatible with Canton’s privacy-by-design ledger model.
+
+## Data flow in the RedStone Pull model on Canton
+
+1. When an application initiates a transaction, it first retrieves the latest RedStone data off-chain using RedStone’s Data Distribution Layer.
+2. The client (backend or frontend) fetches a signed payload consisting of RedStone data packages, containing prices or other oracle values.
+3. This signed payload is embedded directly into the transaction sent to Canton.
+4. Upon arrival at the relevant participant nodes, the Daml smart contract logic verifies the signatures, timestamps, and data integrity.
+5. If the data is valid, the transaction executes using the provided oracle values.
+6. Because the oracle data exists only inside this transaction, it creates no persistent contract state change
+   and is visible only to the parties involved, fully matching Canton’s selective-disclosure privacy model.
+
+## RedStone SDK module — [details](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/canton-connector/daml/sdk/README.md)
+
+Provides the primitives for processing RedStone messages and validating them on Canton, including signature checks,
+timestamp verification, and data-package decoding that application contracts use to safely consume oracle values.
+
+## Core module — [details](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/canton-connector/daml/core/README.md)
+
+Contains an example Daml contract that encapsulates the price-extraction logic using the SDK, demonstrating
+how to integrate RedStone validation into real business logic and how templates can obtain verified oracle prices.
