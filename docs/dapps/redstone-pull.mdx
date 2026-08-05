@@ -89,8 +89,6 @@ You need to apply a minimum change to the source code to enable smart contract t
 
 | Base Contract                                                                                                                                                                                           | Data service with the list of feeds                                                                 | Status     |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------- |
-| [MainDemoConsumerBase.sol](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/evm-connector/contracts/data-services/MainDemoConsumerBase.sol)                             | [redstone-main-demo](https://app.redstone.finance/#/app/data-services/redstone-main-demo)           | Demo       |
-| [AvalancheDataServiceConsumerBase.sol](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/evm-connector/contracts/data-services/AvalancheDataServiceConsumerBase.sol)     | [redstone-avalanche-prod](https://app.redstone.finance/#/app/data-services/redstone-avalanche-prod) | Production |
 | [PrimaryProdDataServiceConsumerBase.sol](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/evm-connector/contracts/data-services/PrimaryProdDataServiceConsumerBase.sol) | [redstone-primary-prod](https://app.redstone.finance/#/app/data-services/redstone-primary-prod)     | Production |
 
 💡 Note: Services with `Production` status have got multiple nodes deployed and are professionally monitored.
@@ -247,7 +245,7 @@ The manual payload could be obtained using the following code on the client side
 
 ```js
 const redstonePayload = await new DataServiceWrapper({
-  dataServiceId: "redstone-main-demo",
+  dataServiceId: "redstone-primary-demo",
   dataFeeds: ["ETH"],
 }).getRedstonePayloadForManualUsage(yourContract);
 
