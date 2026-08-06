@@ -209,7 +209,7 @@ ws.on("message", (raw) => {
 ## Keepalive
 
 The server sends a WebSocket **ping** frame after 120 seconds of inactivity.
-Spec-compliant clients respond with a **pong** automatically — no application-level handling is required.
+Spec-compliant clients respond with a **pong** automatically - no application-level handling is required.
 If no pong is received the server closes the connection with code `1001`. Reconnect and re-subscribe after that.
 
 ---
@@ -218,7 +218,7 @@ If no pong is received the server closes the connection with code `1001`. Reconn
 
 - Up to **30** concurrent connections per API key. Attempts to open more are rejected with `HTTP 429`.
 - Connections are forcibly closed after **8 hours** (code `1006`) regardless of activity. Clients must handle this close event and reconnect.
-- **1 req/s** per connection with bursts up to **20** req — these are WebSocket messages sent over an already-open connection. Exceeding this closes the connection with code `1008`.
+- **1 req/s** per connection with bursts up to **20** req - these are WebSocket messages sent over an already-open connection. Exceeding this closes the connection with code `1008`.
 - There is an outgoing buffer of **1MB** per connection, if a consumer is slow and the buffer fills up, they are disconnected.
 - Messages from a subscriber, larger than **64Kb** are dropped.
 
