@@ -38,7 +38,7 @@ network.
 To register, the following command should be executed in the terminal:
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator register \
   --l1-chain mainnet
 ```
@@ -89,7 +89,7 @@ application ([Restake](https://app.eigenlayer.xyz/token)).
 **Deposit Command:**
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator deposit \
   --l1-chain mainnet \
   --staking-contract-address 0x903a1FF023a35EFeD333ee9D6bF30629A098B9ed
@@ -104,7 +104,7 @@ docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-clien
 **Deposit Command:**
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator deposit \
   --l1-chain mainnet \
   --staking-contract EIGENETH
@@ -119,7 +119,7 @@ docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-clien
 **Deposit Command:**
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator deposit \
   --l1-chain mainnet \
   --staking-contract-address 0x7079A4277eAF578cbe9682ac7BC3EfFF8635ebBf
@@ -234,7 +234,7 @@ following
 command:
 
 ```sh
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
 operator unregister \
 --l1-chain mainnet
 ```

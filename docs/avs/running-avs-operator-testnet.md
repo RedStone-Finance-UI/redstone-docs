@@ -38,7 +38,7 @@ network.
 To register, the following command should be executed in the terminal:
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator register \
   --l1-chain holesky
 ```
@@ -93,7 +93,7 @@ application ([Restake](https://holesky.eigenlayer.xyz/token)).
 **Deposit Command:**
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator deposit \
   --l1-chain holesky \
   --staking-contract EIGENETH
@@ -110,7 +110,7 @@ This is a temporary staking strategy used only on Testnet.
 **Deposit Command:**
 
 ```bash
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
   operator deposit \
   --l1-chain holesky \
   --staking-contract-address 0xb489145e027eE17A33c145aE498c920F89DF640A
@@ -225,7 +225,7 @@ following
 command:
 
 ```sh
-docker run --platform linux/amd64 -it public.ecr.aws/y7v2w8b2/avs-othentic-client:45e26119 \
+docker run --platform linux/arm64 -it public.ecr.aws/z6z4q0a5/prod-avs-othentic-client:b52e8208 \
 operator unregister \
 --l1-chain holesky
 ```
