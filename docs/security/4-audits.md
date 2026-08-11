@@ -18,8 +18,9 @@ RedStone maintains a rigorous external security audit program as a cornerstone o
 | Oracles 2.0         | Completed | ABDK               | [Audit_ABDK_Oracles v2.pdf](https://drive.google.com/file/d/1YENnLswwOLmpoLRrBlbtgi__tA09Piil/view?usp=sharing)                      |
 | Adapter contracts   | Completed | AuditOne           | [Audit_Auditone_Adapter contracts.pdf](https://drive.google.com/file/d/1XGE7LH82Y6ZjWKaVgwgwvPMGi2k0AWQC/view?usp=sharing)           |
 | Fuel connector      | Completed | Halborn            | [Audit_Halborn_Fuel(Sway)\_Sep.pdf](https://drive.google.com/file/d/1J_Jqmeuyn7EzrNXFnIpNmhj3vBFpQLJv/view?usp=sharing)              |
-| TGE contract        | Completed | Codespect          | [Audit_Codespect_TGE.pdf](https://drive.google.com/file/d/1qC_5bes62ADm4yc8FEyjAyk6974r4hi_/view?usp=sharing)                        |
+| TGE contract        | Completed | Codespect          | [Audit_Codespect_TGE.pdf](https://drive.google.com/file/d/1qC_5bes62ADm4yc8FEyjAyk6974r4hi_/view?usp=sharing)  |
 | TGE contract        | Completed | Halborn            | [Audit_Halborn_TGE.pdf](https://drive.google.com/file/d/1boJSNdIneyCoVSAZ855Vz_MVcyYk4Sf_/view?usp=sharing)                          |
+| Oracles             | Completed | Codespect          | [Audit_Codespect_Oracles.pdf](https://github.com/CODESPECT-security/audit-reports/blob/main/001_CODESPECT_REDSTONE_AUDIT_ORACLES.pdf)|
 | Oracles             | Completed | Cantina (SpearBit) | [Audit_Cantina(SpearBit)\_Oracles.pdf](https://drive.google.com/file/d/1f2uaMOPVFuQxEfOUjrbpooh1tm-cD56v/view?usp=sharing)           |
 | Sui connector       | Completed | BitsLab            | [Audit_MoveBit (BitsLab)\_Sui connector.pdf](https://drive.google.com/file/d/1XQE2A-F9QM2fNr6xPY5kwApz75mIn1AV/view?usp=sharing)     |
 | Aggregator          | Completed | ABDK               | [Audit_ABKD_Spark.pdf](https://drive.google.com/file/d/1DQtwxV2B5ymUk0WKcRGZtkCWurrrEkS9/view?usp=sharing)                           |
