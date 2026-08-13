@@ -1,0 +1,10 @@
+{
+  "label": "Stage 2: Capital Efficiency",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "OEV capture and instant liquidity for RWA collateral"
+  },
+  "collapsed": false,
+  "className": "sidebar-stage2-section"
+}

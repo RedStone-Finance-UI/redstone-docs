@@ -1,0 +1,10 @@
+{
+  "label": "Stage 1: Market Data",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "On-chain price feeds, real-time streaming, and Proof of Reserve"
+  },
+  "collapsed": false,
+  "className": "sidebar-stage1-section"
+}

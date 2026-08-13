@@ -1,0 +1,9 @@
+{
+  "label": "Restaking & AVS",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Helpful information for AVS operators"
+  },
+  "collapsed": true
+}
