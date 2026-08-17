@@ -16,9 +16,11 @@ Stage 2 addresses both problems.
 ## Products
 
 ### [RedStone Atom](./atom/what-is-atom.md)
+
 Oracle Extractable Value (OEV) capture for DeFi-native collateral. Instead of publishing a price update and letting bots race to liquidate, Atom runs an offchain auction before the price goes onchain. The winning solver executes the liquidation atomically with the price update, and the auction proceeds flow back to the protocol. No contract changes required; activates on any existing RedStone feed.
 
 ### [RedStone Settle](./settle.md)
+
 An auction-based instant liquidity mechanism for RWA collateral. When a position needs to be liquidated, Settle runs an offchain auction among whitelisted liquidity providers. The winner delivers liquid collateral to the protocol at T+0 and holds the RWA through its redemption window. Collateral that was previously unlistable due to redemption timeline constraints becomes viable for DeFi lending, without requiring changes to the underlying asset or its issuer's operations.
 
 ---

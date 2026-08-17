@@ -29,7 +29,8 @@ Live covers a broad range of asset classes. Coverage spans the classes below; sp
 
 **Equities** — US (large-cap and mid-cap) and non-US stocks (Japan, Taiwan, Europe, Hong Kong, Korea and others)
 
-**Commodities**
+**Commodities** — hard, soft, and metals
+
 - Hard: oil, natural gas, uranium
 - Soft: corn, soy, wheat, cattle
 - Metals: gold, silver, copper, platinum, mining indices

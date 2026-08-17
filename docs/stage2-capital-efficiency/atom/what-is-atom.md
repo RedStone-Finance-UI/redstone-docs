@@ -15,11 +15,11 @@ RedStone Atom changes the model. Instead of publishing a price update and lettin
 
 Every oracle update that triggers a liquidation creates an extractable value event. In the standard model:
 
-* The oracle publishes a price
-* MEV bots race to liquidate, burning gas in the process
-* The winner captures the full liquidation bonus
-* Failed bids waste gas
-* The protocol and its users receive nothing
+- The oracle publishes a price
+- MEV bots race to liquidate, burning gas in the process
+- The winner captures the full liquidation bonus
+- Failed bids waste gas
+- The protocol and its users receive nothing
 
 Most lending protocols accept this as the cost of doing business. Atom treats it as a solvable infrastructure problem.
 
@@ -64,8 +64,8 @@ RedStone deploys the necessary contracts on the designated chain and notifies yo
 
 **Requirements:**
 
-* RedStone must be the primary oracle for the market
-* The specific market where Atom is to be enabled needs to have $5M TVL or more
+- RedStone must be the primary oracle for the market
+- The specific market where Atom is to be enabled needs to have $5M TVL or more
 
 **Who can be a solver:** bot operators, MEV and quant teams, in-house liquidation teams, vault curators with liquidation rights, and any entity that can profitably execute a liquidation after a price update.
 

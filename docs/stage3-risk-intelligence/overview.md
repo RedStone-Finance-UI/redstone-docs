@@ -16,6 +16,7 @@ Stage 3, the risk intelligence layer, does.
 ## Products
 
 ### [Credora](./credora/overview.md)
+
 Real-time credit intelligence for tokenized assets and DeFi protocols. Credora monitors the credit quality of underlying portfolios continuously, publishes ratings onchain, and updates them as conditions change. Ratings are built on methodologies that translate to traditional equivalents, giving risk curators and lending protocols an independent, verifiable signal about what they are lending against.
 
 For curators listing a new RWA as collateral, Credora provides the due diligence signal that a NAV or price feed alone cannot. For liquidity providers deciding whether to participate in a Settle auction, it provides an independent assessment of asset quality. For the DeFi ecosystem broadly, it introduces ongoing credit underwriting as a native component of the lending stack.

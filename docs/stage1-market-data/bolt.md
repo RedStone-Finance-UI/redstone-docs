@@ -37,13 +37,13 @@ For integrations where every microsecond counts, RedStone can co-locate Bolt nod
 
 ## Performance
 
-| Metric | Bolt | Standard Push Oracle |
-|---|---|---|
-| Update interval | **&lt;10ms** | 10 seconds – 24 hours |
-| Updates per second | **400+** | &lt; 1 |
-| Model | Push | Push |
-| Contract compatibility | Existing push contracts | Existing push contracts |
-| Oracle colocation | Yes, with sequencer (optional) | No |
+| Metric                 | Bolt                           | Standard Push Oracle    |
+| ---------------------- | ------------------------------ | ----------------------- |
+| Update interval        | **&lt;10ms**                   | 10 seconds – 24 hours   |
+| Updates per second     | **400+**                       | &lt; 1                  |
+| Model                  | Push                           | Push                    |
+| Contract compatibility | Existing push contracts        | Existing push contracts |
+| Oracle colocation      | Yes, with sequencer (optional) | No                      |
 
 To put the speed difference in context: standard Ethereum push feeds deliver ETH/USD approximately 40–60 times in a 24-hour window. Bolt delivers over 400 updates per second, roughly 576,000× faster.
 

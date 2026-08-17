@@ -49,7 +49,7 @@ The on-chain relayer is based on the [PriceFeedsAdapter contract](https://github
 - storing information regarding the round number and timestamp of the last update,
 - getting prices for multiple feeds' values in a single call.
 
-Additionally, if the protocol wants to be 100% compatible with the Chainlink PriceFeed architecture, it's possible to deploy additional [PriceFeed](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/on-chain-relayer/contracts/price-feeds/PriceFeedBase.sol) contracts to mimic this solution.
+Additionally, if the protocol wants to be 100% compatible with the Chainlink PriceFeed architecture, it's possible to deploy additional [PriceFeed](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/evm-adapters/contracts/price-feeds/PriceFeedBase.sol) contracts to mimic this solution.
 
 ### Environment variables
 
