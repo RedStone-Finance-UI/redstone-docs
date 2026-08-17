@@ -89,12 +89,6 @@ This approach lets issuers provide verifiable, auditable reporting to LPs and pr
 
 ---
 
-## Connection to RedStone Settle
-
-For RWA assets used as collateral in DeFi lending markets, a PoR or NAV feed is a prerequisite for [RedStone Settle](../stage2-capital-efficiency/settle.md). Settle provides an auction-based instant liquidity mechanism for assets with long redemption periods allowing protocols to prevent bad debt without waiting for the issuer's redemption window. The price feed published by RedStone is what triggers and settles the auction.
-
----
-
 ## Reference Implementation
 
 See the [Lombard LBTC feed](../technical-reference/data-quality/lombard-lbtc.md) for a worked example of a continuous Proof of Reserve calculation for a Bitcoin liquid staking token.

@@ -89,4 +89,4 @@ RedStone approaches perps integration as ongoing engineering collaboration, inst
 
 Live is available via API key. To discuss an integration, including asset coverage, rollover methodology, sourcing configuration, and latency requirements, [contact RedStone](https://redstone.finance/contact).
 
-→ For technical integration details, see the [API Reference](./api-reference.md).
+→ For technical integration details, see [Integration](./api-reference.md).

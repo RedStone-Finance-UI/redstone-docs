@@ -1,9 +1,9 @@
 ---
 sidebar_position: 2
-sidebar_label: "Live Feeds"
+sidebar_label: "Integration"
 ---
 
-# Redstone Live Feeds
+# Integration
 
 Best suited for dApps that require low-latency data.
 
