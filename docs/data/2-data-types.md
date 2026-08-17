@@ -23,7 +23,7 @@ Oracles deliver data feeds directly to dApps or blockchains for the correct exec
 
    a) **Contract Rate Feed**
 
-   Also known as Exchange Rate or Fundamental Feed. A ratio between the underlying asset and its derivative derived from the smart contract of a protocol, i.e., wstETH / stETH rate derived from Lido contract or weETH / eETH derived from Ether.fi contract.
+   A ratio between the underlying asset and its derivative derived from the smart contract of a protocol, i.e., wstETH / stETH rate derived from Lido contract or weETH / eETH derived from Ether.fi contract.
 
    b) **Net Asset Value (NAV) Feed**
 
