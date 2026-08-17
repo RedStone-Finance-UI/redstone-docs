@@ -33,7 +33,7 @@ Settle is an auction-based instant liquidity mechanism. The core flow is the sam
 
 1. A position becomes eligible, either because a borrower's collateral ratio breaches the liquidation threshold or because a holder requests an instant exit.
 2. Settle runs an offchain auction among a network of whitelisted liquidity providers. Each provider bids the discount they require to take the RWA position immediately. The provider offering the lowest discount wins.
-3. The winning liquidity provider repays the debt and captures the collateral at discounted price.
+3. The winning liquidity provider repays the debt and captures the collateral at a discounted price.
 4. The liquidity provider receives the RWA at the discounted price and holds it through the issuer's redemption window, collecting the discount as yield.
 
 Typical range between 1–5%. The entire mechanism settles atomically for liquidations: the onchain price update and the settlement execute in the same transaction, which is what prevents front-running. There is no gap between the price change and the settlement for an MEV bot to exploit.
