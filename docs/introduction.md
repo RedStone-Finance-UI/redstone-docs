@@ -6,7 +6,9 @@ sidebar_class_name: sidebar-redstone-section
 
 # Introduction
 
-The documentation is organized around the RedStone Stack, a three-stage architecture covering data delivery, capital efficiency, and risk intelligence.
+RedStone has become key infrastructure for DeFi and institutions bringing real-world assets onchain. Our infrastructure underpins some of the largest markets in onchain finance and delivers critical data and settlement rails for tokenized assets from BlackRock (BUIDL), Apollo (ACRED), Hamilton Lane (SCOPE), and many other leading firms - helping solve the liquidity and accessibility challenges that stand between institutions and digital assets.
+
+RedStone's offering is organized around a three-layer stack spanning data delivery, capital efficiency, and risk intelligence.
 
 ---
 
