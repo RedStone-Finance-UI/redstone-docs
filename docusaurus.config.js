@@ -231,6 +231,18 @@ const config = {
             to: "/docs/technical-reference/non-evm-chains/overview",
           },
           {
+            from: "/docs/dapps/non-evm/radix",
+            to: "/docs/technical-reference/non-evm-chains/overview",
+          },
+          {
+            from: "/docs/dapps/non-evm/radix/rust-tutorial",
+            to: "/docs/technical-reference/non-evm-chains/overview",
+          },
+          {
+            from: "/docs/dapps/non-evm/radix/typescript-tutorial",
+            to: "/docs/technical-reference/non-evm-chains/overview",
+          },
+          {
             from: "/docs/dapps/non-evm/canton",
             to: "/docs/technical-reference/non-evm-chains/canton",
           },
