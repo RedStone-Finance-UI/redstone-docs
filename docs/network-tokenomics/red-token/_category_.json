@@ -1,0 +1,9 @@
+{
+  "label": "RED Token",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "RedStone Token"
+  },
+  "collapsed": true
+}

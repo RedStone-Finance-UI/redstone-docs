@@ -41,7 +41,7 @@
   --font-family-semi: 'SequelSans-Semi', sans-serif;
   --ifm-navbar-background-color: rgba(255, 255, 255, 0.7);
   --ifm-container-width-xl: 1600px;
-  --ifm-spacing-horizontal: 20px
+  --ifm-spacing-horizontal: 20px;
 }
 
 [data-theme='dark'] {
@@ -134,17 +134,23 @@ h4, h5, h6 {
   font-family: var(--font-family-semi);
 }
 
-li.sidebar-credora-section {
-  margin-top: 48px !important;
+li.sidebar-credora-section > div > a.menu__link {
+  font-weight: 600;
 }
 
-li.sidebar-credora-section > div > a.menu__link, li.sidebar-redstone-section > a.menu__link {
+li.sidebar-redstone-section > a.menu__link {
   color: var(--ifm-color-primary) !important;
   font-weight: 600;
 }
 
 li.sidebar-terminal-section {
     display: none !important;
+}
+
+li.sidebar-stage1-section > div > a.menu__link,
+li.sidebar-stage2-section > div > a.menu__link,
+li.sidebar-stage3-section > div > a.menu__link {
+  font-weight: 600;
 }
 
 .red-divider {
@@ -154,12 +160,12 @@ li.sidebar-terminal-section {
   border: none;
 }
 
-html[class*="docs-doc-id-redstone-credora/methodologies/assets/framework-architecture/anchor-pd"] .theme-doc-markdown h2,
-html[class*="docs-doc-id-redstone-credora/methodologies/assets/framework-architecture/modifiers"] .theme-doc-markdown h2 {
+html[class*="docs-doc-id-stage3-risk-intelligence/credora/methodologies/assets/framework-architecture/anchor-pd"] .theme-doc-markdown h2,
+html[class*="docs-doc-id-stage3-risk-intelligence/credora/methodologies/assets/framework-architecture/modifiers"] .theme-doc-markdown h2 {
   margin-top: 3.5rem;
 }
 
-html[class*="docs-doc-id-redstone-credora/methodologies/assets/framework-architecture/anchor-pd"] .theme-doc-markdown h3,
-html[class*="docs-doc-id-redstone-credora/methodologies/assets/framework-architecture/modifiers"] .theme-doc-markdown h3 {
+html[class*="docs-doc-id-stage3-risk-intelligence/credora/methodologies/assets/framework-architecture/anchor-pd"] .theme-doc-markdown h3,
+html[class*="docs-doc-id-stage3-risk-intelligence/credora/methodologies/assets/framework-architecture/modifiers"] .theme-doc-markdown h3 {
   margin-top: 2.75rem;
 }
