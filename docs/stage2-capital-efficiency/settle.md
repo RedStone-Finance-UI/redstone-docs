@@ -36,7 +36,7 @@ Settle is an auction-based instant liquidity mechanism. The core flow is the sam
 3. The winning liquidity provider repays the debt and captures the collateral at a discounted price.
 4. The liquidity provider receives the RWA at the discounted price and holds it through the issuer's redemption window, collecting the discount as yield.
 
-Typical range between 1–5%. The entire mechanism settles atomically for liquidations: the onchain price update and the settlement execute in the same transaction, which is what prevents front-running. There is no gap between the price change and the settlement for an MEV bot to exploit.
+The discount typically ranges between 1–5%. The entire mechanism settles atomically for liquidations: the onchain price update and the settlement execute in the same transaction, which is what prevents front-running. There is no gap between the price change and the settlement for an MEV bot to exploit.
 
 **Execution speed:** ~400ms for onchain capital.
 
