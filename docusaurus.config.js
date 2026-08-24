@@ -29,11 +29,6 @@ const config = {
     locales: ["en"],
   },
 
-  markdown: {
-    mermaid: true,
-  },
-  themes: ["@docusaurus/theme-mermaid"],
-
   presets: [
     [
       "classic",
@@ -53,13 +48,17 @@ const config = {
           },
         },
         theme: {
-          customCss: [require.resolve("./src/css/custom.css")],
+          customCss: [
+            require.resolve("./src/css/custom.css"),
+          ],
         },
       }),
     ],
   ],
 
-  scripts: [{ src: "/js/custom.js", async: true }],
+  scripts: [
+    { src: "/js/custom.js", async: true },
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -111,7 +110,7 @@ const config = {
                 href: "https://redstone.finance/team",
               },
             ],
-          },
+          }
         ],
         copyright: `${new Date().getFullYear()} All Rights Reserved
 `,
