@@ -67,7 +67,7 @@ In foundry project:
 You need to do 2 things:
 
 1. [Adjust your smart contracts](#1-adjust-your-smart-contracts) to include the libraries responsible for data extraction and verification
-2. [Adjust Javascript code of your dApp](#2-adjust-javascript-code-of-your-dapp) to inject the additional payload with data feeds (otherwise you will get smart contract errors).
+2. [Adjust Javascript code of your dApp](#2-adjust-javascript-code-of-your-dapp) to inject the additional payload with data feeds, using API key(s) from RedStone - if this code runs in your dApp's frontend, you'll also need a proxy in front of RedStone's gateway (otherwise you will get smart contract errors).
 
 :::
 
