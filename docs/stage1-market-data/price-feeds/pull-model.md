@@ -211,7 +211,7 @@ Put a proxy in front of RedStone's gateway that caches responses and attaches yo
 
 A CDN like AWS CloudFront can do this directly - just add your API key as a custom origin request header and enable caching, no custom backend needed.
 
-To get an API key (and, for backend/script/bot use, the gateway `url` to pair it with), reach out to the RedStone team on Telegram: **TODO: add Telegram handle**.
+To get an API key and gateway `url`, fill out [this form](https://docs.google.com/forms/d/e/1FAIpQLSd1FyV0TLXjRtpor8_LbhdrdYimmgMrb_cK0FZ1xc8EGceIPg/viewform?usp=dialog).
 
 #### Testing
 
@@ -293,4 +293,4 @@ You can see examples of the `@redstone-finance/evm-connector` usage in our [dedi
 Even though the most popular way of using RedStone data is to pass it on-chain one may want to consume it off-chain.
 For this scenario we created [@redstone-finance/sdk](https://www.npmjs.com/package/@redstone-finance/sdk).
 
-Off-chain functions such as `requestDataPackages` also require the `authenticatedGateways` parameter - see [Authenticated gateways](#authenticated-gateways).
+SDK functions such as `requestDataPackages` also require the `authenticatedGateways` parameter - see [Authenticated gateways](#authenticated-gateways).
