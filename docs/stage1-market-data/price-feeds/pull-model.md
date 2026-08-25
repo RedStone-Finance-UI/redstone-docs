@@ -164,7 +164,7 @@ import { WrapperBuilder } from "@redstone-finance/evm-connector";
   </TabItem>
 </Tabs>
 
-Then you can wrap your ethers contract pointing to the selected [RedStone data service id.](https://app.redstone.finance/#/app/data-services) You can (optionally) specify a number of unique signers and data feed identifiers. You must also pass `authenticatedGateways` (see [below](#authenticated-gateways)) - if this code runs in your dApp's frontend, point it at your own proxy rather than at RedStone directly (see the warning below).
+Then you can wrap your ethers contract pointing to the selected [RedStone data service id.](https://app.redstone.finance/#/app/data-services) You can (optionally) specify a number of unique signers and data feed identifiers, and must also pass `authenticatedGateways` (see [below](#authenticated-gateways)).
 
 ```js
 import { getSignersForDataServiceId } from "@redstone-finance/sdk";
@@ -193,29 +193,25 @@ authenticatedGateways: { url: string; apiKey: string }[];
 ```
 
 - `apiKey` - sent as an `x-api-key` header on every request to that gateway.
-- `url` - for a private use case where this code never reaches end users (a backend, a script, a bot), set this to the actual gateway address RedStone gives you. If this code runs in a dApp's frontend (public), set it to your own proxy's address instead (see below).
+- `url` - the gateway address to call. For backend/script/bot code, use the authenticated gateway URL RedStone gives you (see below); frontend code must instead point it at your own proxy.
 - Rate limit on RedStone's own gateway: **1 request/second per API key**.
 - You can list more than one entry to query multiple gateways for better availability, each with its own key.
 
 :::warning Don't call RedStone's gateway directly from a dApp's frontend
-A dApp's frontend runs in every visitor's browser, so anything in it - including an API key - is public: readable from the page source, the JS bundle, or the network tab. It also means every visitor's browser would be hitting RedStone under the same key, which blows past the 1 request/second limit almost instantly. Repeated or sustained rate limit violations can get the key blocked for a longer period, or permanently.
+A frontend runs in every visitor's browser, so any API key embedded in it is exposed - readable straight from the page source, the JS bundle, or a network inspector. Anyone can extract it and hammer RedStone's gateway with it directly, exhausting your 1 request/second limit and getting the key rate-limited or blocked for every legitimate user of your dApp.
 
-Instead, run a small proxy/cache backend that you control:
+Instead, run a small proxy/cache backend that you control: it holds your real API key, fetches from RedStone's gateway, and caches the response for a few seconds so you stay within the rate limit regardless of traffic. Point your frontend's `authenticatedGateways` at *your* proxy's URL with `apiKey: ""`.
 
-- It holds your real API key and fetches data packages from RedStone's authenticated gateway on your behalf, caching the response for a few seconds - this is what keeps you within the rate limit no matter how much traffic your dApp gets.
-- It re-serves that cached response in the same shape as RedStone's gateway (see [Building your own proxy](#building-your-own-proxy) below), at a URL you control.
-- Your dApp's frontend then points `authenticatedGateways` at *your* proxy's URL with `apiKey: ""` - the real key is never sent from the browser, since your proxy doesn't need to check it.
-
-If your calling code instead runs somewhere trusted that never reaches end users (a backend relayer, a bot, a script), you can skip the proxy and pass your real API key directly, the same way as in the example above.
+Backend code that never reaches end users (a relayer, a bot, a script) can skip the proxy and pass the real API key directly, as in the example above.
 :::
 
-##### Building your own proxy
+##### Proxy setup
 
-Your proxy just needs to sit in front of RedStone's authenticated gateway: forward incoming requests to it with your real API key attached, then pass the response straight back - publicly, with no API key required from the caller. There's no need to pick and reimplement individual endpoints; simply forward everything through as-is.
+Put a proxy in front of RedStone's gateway that caches responses and attaches your API key on the way through, so callers never see it.
 
-Cache the response for a few seconds instead of forwarding every single request 1:1 - that's what keeps one proxy comfortably under RedStone's rate limit no matter how many end users your dApp has.
+A CDN like AWS CloudFront can do this directly - just add your API key as a custom origin request header and enable caching, no custom backend or edge functions needed.
 
-To get an API key (and, for a private/backend use case, the gateway `url` to pair it with), reach out to the RedStone team on Telegram: **TODO: add Telegram handle**.
+To get an API key (and, for backend/script/bot use, the gateway `url` to pair it with), reach out to the RedStone team on Telegram: **TODO: add Telegram handle**.
 
 #### Testing
 
@@ -275,7 +271,7 @@ function getPriceFromRedstoneOracle(bytes32 feedId, bytes calldata redstonePaylo
 }
 ```
 
-The manual payload could be obtained using the following code. As with the wrapper above, `authenticatedGateways` is required here too - see [Authenticated gateways](#authenticated-gateways). If this code runs in a dApp's frontend, point it at your own proxy the same way as above rather than passing your real API key.
+The manual payload could be obtained using the following code. `authenticatedGateways` is required here too - see [Authenticated gateways](#authenticated-gateways).
 
 ```js
 const redstonePayload = await new DataServiceWrapper({
@@ -297,4 +293,4 @@ You can see examples of the `@redstone-finance/evm-connector` usage in our [dedi
 Even though the most popular way of using RedStone data is to pass it on-chain one may want to consume it off-chain.
 For this scenario we created [@redstone-finance/sdk](https://www.npmjs.com/package/@redstone-finance/sdk).
 
-Off-chain functions such as `requestDataPackages` also require the `authenticatedGateways` parameter described in [Authenticated gateways](#authenticated-gateways) above. If the code calling them is only reachable from your own backend, you can pass your real API key directly; if it's reachable by end users, point it at your own proxy instead (see [Building your own proxy](#building-your-own-proxy)).
+Off-chain functions such as `requestDataPackages` also require the `authenticatedGateways` parameter - see [Authenticated gateways](#authenticated-gateways).
