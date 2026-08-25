@@ -195,7 +195,7 @@ authenticatedGateways: { url: string; apiKey: string }[];
 - `apiKey` - sent as an `x-api-key` header on every request to that gateway.
 - `url` - the gateway address to call. For backend/script/bot code, use the authenticated gateway URL RedStone gives you (see below); frontend code must instead point it at your own proxy.
 - Rate limit on RedStone's own gateway: **1 request/second per API key**.
-- You can list more than one entry to query multiple gateways for better availability, each with its own key.
+- For better availability, use both (gateway, API key) pairs RedStone gives you - the second one serves as a fallback.
 
 :::warning Don't call RedStone's gateway directly from a dApp's frontend
 A frontend runs in every visitor's browser, so any API key embedded in it is exposed - readable straight from the page source, the JS bundle, or a network inspector. Anyone can extract it and hammer RedStone's gateway with it directly, exhausting your 1 request/second limit and getting the key rate-limited or blocked for every legitimate user of your dApp.
