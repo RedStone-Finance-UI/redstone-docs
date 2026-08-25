@@ -189,7 +189,11 @@ wrappedContract.executeYourMethod();
 Fetching data packages (both for contract wrapping and for the [manual payload](#manual-payload) flow) requires an `authenticatedGateways` parameter: a list of gateways to query, each with its own API key.
 
 ```ts
-authenticatedGateways: { url: string; apiKey: string }[];
+authenticatedGateways: {
+  url: string;
+  apiKey: string;
+}
+[];
 ```
 
 - `apiKey` - sent as an `x-api-key` header on every request to that gateway.
@@ -200,7 +204,7 @@ authenticatedGateways: { url: string; apiKey: string }[];
 :::warning Don't call RedStone's gateway directly from a dApp's frontend
 A frontend runs in every visitor's browser, so any API key embedded in it is exposed - readable straight from the page source, the JS bundle, or a network inspector. Anyone can extract it and hammer RedStone's gateway with it directly, exhausting your 1 request/second limit and getting the key rate-limited or blocked for every legitimate user of your dApp.
 
-Instead, run a small proxy/cache backend that you control: it holds your real API key, fetches from RedStone's gateway, and caches the response for a few seconds so you stay within the rate limit regardless of traffic. Point your frontend's `authenticatedGateways` at *your* proxy's URL with `apiKey: ""`.
+Instead, run a small proxy/cache backend that you control: it holds your real API key, fetches from RedStone's gateway, and caches the response for a few seconds so you stay within the rate limit regardless of traffic. Point your frontend's `authenticatedGateways` at _your_ proxy's URL with `apiKey: ""`.
 
 Backend code that never reaches end users (a relayer, a bot, a script) can skip the proxy and pass the real API key directly, as in the example above.
 :::
