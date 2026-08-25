@@ -193,7 +193,7 @@ authenticatedGateways: { url: string; apiKey: string }[];
 ```
 
 - `apiKey` - sent as an `x-api-key` header on every request to that gateway.
-- `url` - the gateway address to call. For backend/script/bot code, use the authenticated gateway URL RedStone gives you (see below); frontend code must instead point it at your own proxy.
+- `url` - the gateway address to call. For backend/script/bot code, use the authenticated gateway URL RedStone gives you (see below). Frontend code must instead point it at your own proxy.
 - Rate limit on RedStone's own gateway: **1 request/second per API key**.
 - For better availability, use both (gateway, API key) pairs RedStone gives you - the second one serves as a fallback.
 
@@ -209,7 +209,7 @@ Backend code that never reaches end users (a relayer, a bot, a script) can skip 
 
 Put a proxy in front of RedStone's gateway that caches responses and attaches your API key on the way through, so callers never see it.
 
-A CDN like AWS CloudFront can do this directly - just add your API key as a custom origin request header and enable caching, no custom backend or edge functions needed.
+A CDN like AWS CloudFront can do this directly - just add your API key as a custom origin request header and enable caching, no custom backend needed.
 
 To get an API key (and, for backend/script/bot use, the gateway `url` to pair it with), reach out to the RedStone team on Telegram: **TODO: add Telegram handle**.
 
