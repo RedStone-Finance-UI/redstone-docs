@@ -1,9 +1,0 @@
-{
-  "label": "Data quality",
-  "position": 4,
-  "link": {
-    "type": "generated-index",
-    "description": "Details about data types and methodology"
-  },
-  "collapsed": true
-}

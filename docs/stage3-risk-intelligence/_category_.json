@@ -1,0 +1,10 @@
+{
+  "label": "Stage 3: Risk Intelligence",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Onchain credit ratings for tokenized assets and DeFi protocols"
+  },
+  "collapsed": false,
+  "className": "sidebar-stage3-section"
+}

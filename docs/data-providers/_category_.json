@@ -1,9 +1,0 @@
-{
-  "label": "Data Providers",
-  "position": 6,
-  "link": {
-    "type": "generated-index",
-    "description": "Helpful information for Oracle Node operators"
-  },
-  "collapsed": true
-}
