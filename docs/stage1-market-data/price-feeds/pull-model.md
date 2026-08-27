@@ -67,7 +67,7 @@ In foundry project:
 You need to do 2 things:
 
 1. [Adjust your smart contracts](#1-adjust-your-smart-contracts) to include the libraries responsible for data extraction and verification
-2. [Adjust Javascript code of your dApp](#2-adjust-javascript-code-of-your-dapp) to inject the additional payload with data feeds (otherwise you will get smart contract errors).
+2. [Adjust Javascript code of your dApp](#2-adjust-javascript-code-of-your-dapp) to inject the additional payload with data feeds, using API key(s) from RedStone (otherwise you will get smart contract errors). If this code runs in your dApp's frontend, you'll also need a proxy in front of RedStone's gateway.
 
 :::
 
@@ -164,7 +164,7 @@ import { WrapperBuilder } from "@redstone-finance/evm-connector";
   </TabItem>
 </Tabs>
 
-Then you can wrap your ethers contract pointing to the selected [RedStone data service id.](https://app.redstone.finance/#/app/data-services) You can (optionally) specify a number of unique signers, data feed identifiers, and URLs for the redstone cache nodes.
+Then you can wrap your ethers contract pointing to the selected [RedStone data service id.](https://app.redstone.finance/#/app/data-services) You can (optionally) specify a number of unique signers and data feed identifiers, and must also pass `authenticatedGateways` (see [below](#authenticated-gateways)).
 
 ```js
 import { getSignersForDataServiceId } from "@redstone-finance/sdk";
@@ -174,6 +174,7 @@ const yourEthersContract = new ethers.Contract(address, abi, provider);
 const wrappedContract = WrapperBuilder.wrap(contract).usingDataService({
   dataPackagesIds: ["ETH", "BTC"],
   authorizedSigners: getSignersForDataServiceId(DATA_SERVICE_ID),
+  authenticatedGateways: [{ url: "<your-proxy-url>", apiKey: "" }],
 });
 ```
 
@@ -182,6 +183,39 @@ Now you can access any of the contract's methods in exactly the same way as inte
 ```js
 wrappedContract.executeYourMethod();
 ```
+
+#### Authenticated gateways
+
+Fetching data packages (both for contract wrapping and for the [manual payload](#manual-payload) flow) requires an `authenticatedGateways` parameter: a list of gateways to query, each with its own API key.
+
+```ts
+authenticatedGateways: {
+  url: string;
+  apiKey: string;
+}
+[];
+```
+
+- `apiKey` - sent as an `x-api-key` header on every request to that gateway.
+- `url` - the gateway address to call. For backend/script/bot code, use the authenticated gateway URL RedStone gives you (see below). Frontend code must instead point it at your own proxy.
+- Rate limit on RedStone's own gateway: **1 request/second per API key**.
+- For better availability, use both (gateway, API key) pairs RedStone gives you - the second one serves as a fallback.
+
+:::warning Don't call RedStone's gateway directly from a dApp's frontend
+A frontend runs in every visitor's browser, so any API key embedded in it is exposed - readable straight from the page source, the JS bundle, or a network inspector. Anyone can extract it and hammer RedStone's gateway with it directly, exhausting your 1 request/second limit and getting the key rate-limited or blocked for every legitimate user of your dApp.
+
+Instead, run a small proxy/cache backend that you control: it holds your real API key, fetches from RedStone's gateway, and caches the response for a few seconds so you stay within the rate limit regardless of traffic. Point your frontend's `authenticatedGateways` at _your_ proxy's URL with `apiKey: ""`.
+
+Backend code that never reaches end users (a relayer, a bot, a script) can skip the proxy and pass the real API key directly, as in the example above.
+:::
+
+##### Proxy setup
+
+Put a proxy in front of RedStone's gateway that caches responses and attaches your API key on the way through, so callers never see it.
+
+A CDN like AWS CloudFront can do this directly - just add your API key as a custom origin request header and enable caching, no custom backend needed.
+
+To get an API key and gateway `url`, fill out [this form](https://docs.google.com/forms/d/e/1FAIpQLSd1FyV0TLXjRtpor8_LbhdrdYimmgMrb_cK0FZ1xc8EGceIPg/viewform?usp=dialog).
 
 #### Testing
 
@@ -241,12 +275,13 @@ function getPriceFromRedstoneOracle(bytes32 feedId, bytes calldata redstonePaylo
 }
 ```
 
-The manual payload could be obtained using the following code on the client side:
+The manual payload could be obtained using the following code. `authenticatedGateways` is required here too - see [Authenticated gateways](#authenticated-gateways).
 
 ```js
 const redstonePayload = await new DataServiceWrapper({
   dataServiceId: "redstone-primary-demo",
   dataFeeds: ["ETH"],
+  authenticatedGateways: [{ url: "<your-proxy-url>", apiKey: "" }],
 }).getRedstonePayloadForManualUsage(yourContract);
 
 // Interact with the contract (getting oracle value securely)
@@ -261,3 +296,5 @@ You can see examples of the `@redstone-finance/evm-connector` usage in our [dedi
 
 Even though the most popular way of using RedStone data is to pass it on-chain one may want to consume it off-chain.
 For this scenario we created [@redstone-finance/sdk](https://www.npmjs.com/package/@redstone-finance/sdk).
+
+SDK functions such as `requestDataPackages` also require the `authenticatedGateways` parameter - see [Authenticated gateways](#authenticated-gateways).
