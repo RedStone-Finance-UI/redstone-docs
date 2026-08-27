@@ -36,9 +36,9 @@ Settle is an auction-based instant liquidity mechanism. The core flow is the sam
 3. The winning liquidity provider repays the debt and captures the collateral at a discounted price.
 4. The liquidity provider receives the RWA at the discounted price and holds it through the issuer's redemption window, collecting the discount as yield.
 
-The discount typically ranges between 1–5%. The entire mechanism settles atomically for liquidations: the onchain price update and the settlement execute in the same transaction, which is what prevents front-running. There is no gap between the price change and the settlement for an MEV bot to exploit.
+The entire mechanism settles atomically for liquidations: the onchain price update and the settlement execute in the same transaction, which is what prevents front-running. There is no gap between the price change and the settlement for an MEV bot to exploit.
 
-**Execution speed:** ~400ms for onchain capital.
+**Execution speed:** under 300ms for onchain capital.
 
 **Current scope:** Settle is live for protocol liquidations. Instant redemption functionality allowing a holder to exit a collateralized RWA position directly, without waiting for the protocol's liquidation threshold, is on the near-term roadmap. Instant redemption works as a transfer of position, not a fund-level redemption: the liquidity provider acquires the holder's RWA at a discount and holds it through the redemption window. The fund issuer's TVL is unchanged, and the holder exits immediately.
 
@@ -48,7 +48,7 @@ The discount typically ranges between 1–5%. The entire mechanism settles atomi
 
 Due to RedStone's deep integration with lending protocols as price feed provider, the infrastructure can instantly detect the need for additional liquidity and deliver it just in time.
 
-When a price change triggers a potential liquidation, RedStone detects that change before publishing it onchain. The offchain auction runs in that window (typically 400ms). The winning liquidity provider's settlement and the onchain price update are then submitted in the same transaction.
+When a price change triggers a potential liquidation, RedStone detects that change before publishing it onchain. The offchain auction runs in that window (under 300ms). The winning liquidity provider's settlement and the onchain price update are then submitted in the same transaction.
 
 ---
 
@@ -64,7 +64,7 @@ Settle handles compliance natively: each asset's solver whitelist contains only 
 
 Settle is built around an open, expanding network of liquidity providers. RedStone streams liquidation and redemption volume to this network; participating providers can either join an individual auction by submitting a bid or act as standing liquidity providers with pre-configured participation terms. The auction selects the best offer at the time of each event.
 
-The network launched with Symbiotic as the infrastructure partner. Liquidity providers deposit capital into Symbiotic vaults designated for RWA settlement. When an auction runs, vault capital is used to acquire the RWA at the discounted price, the RWA is held through the redemption window, and the discount-to-redemption spread is distributed as yield to vault depositors. Providers earn from two streams: the baseline yield on idle capital and the acquisition discount on each settlement event.
+The network launched with Symbiotic as the infrastructure partner. Providers earn from two streams: the baseline yield on idle capital and the acquisition discount on each settlement event.
 
 Solvers, the entities that submit bids in the auction, must post a deposit to participate. If a solver submits a winning bid and fails to deliver the capital, the settlement reverts and the solver is slashed. This eliminates the economic incentive for malicious or non-credible bidding.
 

@@ -7,13 +7,13 @@ sidebar_label: "Overview"
 
 RedStone Live is an off-chain market data streaming service that delivers cryptographically verifiable price data via WebSocket. It is designed for protocols and applications that need real-time data before it touches a blockchain such as perpetual exchanges, centralized exchanges, options protocols, market makers, prediction markets, synthetic asset platforms, off-chain risk engines, and institutional trading systems.
 
-Unlike on-chain price feeds (push or pull), Live delivers data to your backend directly. Your system consumes it in real time and decides when and how to use it whether that's powering mark prices and funding rates, triggering liquidation logic, or driving a frontend chart.
+Unlike on-chain price feeds (push or pull), Live delivers data to your backend directly. Your system consumes it in real time and decides when and how to use it whether that's powering mark prices and funding rates or triggering liquidation logic.
 
 ---
 
 ## Who It's For
 
-**Perpetual exchanges** are the primary use case. Perps require continuous pricing across asset classes that include equities, commodities, FX, and indices alongside crypto — assets with market hours, contract expiries, corporate actions, and complex sourcing requirements. Live is built to handle all of that. Both for DEXes and CEXes.
+**Perpetual exchanges** are the primary use case. Perps require continuous pricing across asset classes that include equities, commodities, FX, and indices alongside crypto — assets synchronized with trading calendars, contract expiries, corporate actions, and complex sourcing requirements. Live is built to handle all of that. Both for DEXes and CEXes.
 
 **Options protocols** — RedStone Live provides institutional-grade options data on major US equities and commodities. Options data covers the pricing, volume, and open interest of derivative contracts. Live is uniquely positioned to power options protocols expanding into RWAs.
 
@@ -37,7 +37,7 @@ Live covers a broad range of asset classes. Coverage spans the classes below; sp
 
 **FX** — major pairs and emerging market currencies (KRW, JPY, EUR, and more)
 
-**Indices** — S&P 500, NASDAQ, NIKKEI 225, KOSPI, HK50, and others
+**Indices** — the most popular global equity indices, with support for custom methodologies
 
 **Crypto** — top 20 assets by market cap
 

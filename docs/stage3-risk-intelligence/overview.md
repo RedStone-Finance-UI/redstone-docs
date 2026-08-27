@@ -7,9 +7,7 @@ sidebar_label: "Overview"
 
 Stage 1 provides prices. Stage 2 makes the collateral liquid. Stage 3 answers the question neither addresses: how creditworthy is the collateral itself?
 
-Overcollateralization is DeFi's primary risk management mechanism. A borrower posting 150% collateral against a loan creates a buffer against price swings, but the underlying credit quality of the collateral is not assessed. A private credit fund accepted at 70% LTV may have deteriorating underlying loans. A tokenized bond backed by a single issuer may carry concentration risk. Price feeds do not deliver credit signals.
-
-Stage 3, the risk intelligence layer, does.
+Overcollateralization is DeFi's primary risk management mechanism. A borrower posting 150% collateral against a loan creates a buffer against price swings, but the underlying credit quality of the collateral is not assessed. A private credit fund accepted at 70% LTV may have deteriorating underlying loans. A tokenized bond backed by a single issuer may carry concentration risk. Price feeds do not deliver credit signals. Stage 3, the risk intelligence layer, does.
 
 ---
 
@@ -17,7 +15,7 @@ Stage 3, the risk intelligence layer, does.
 
 ### [Credora](./credora/overview.md)
 
-Real-time credit intelligence for tokenized assets and DeFi protocols. Credora monitors the credit quality of underlying portfolios continuously, publishes ratings onchain, and updates them as conditions change. Ratings are built on methodologies that translate to traditional equivalents, giving risk curators and lending protocols an independent, verifiable signal about what they are lending against.
+Credora monitors the credit quality of underlying portfolios continuously, publishes ratings onchain, and updates them as conditions change. Ratings are built on methodologies that translate to traditional equivalents, giving risk curators and lending protocols an independent, verifiable signal about what they are lending against.
 
 For curators listing a new RWA as collateral, Credora provides the due diligence signal that a NAV or price feed alone cannot. For liquidity providers deciding whether to participate in a Settle auction, it provides an independent assessment of asset quality. For the DeFi ecosystem broadly, it introduces ongoing credit underwriting as a native component of the lending stack.
 

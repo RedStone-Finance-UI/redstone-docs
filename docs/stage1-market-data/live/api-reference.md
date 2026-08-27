@@ -223,7 +223,7 @@ If no pong is received the server closes the connection with code `1001`. Reconn
 - There is an outgoing buffer of **1MB** per connection, if a consumer is slow and the buffer fills up, they are disconnected.
 - Messages from a subscriber, larger than **64Kb** are dropped.
 
-### Coming August 21, 2026
+### Coming September 1, 2026
 
 The following limits are being introduced on this date. Until then, connections that exceed them keep working. Review your client ahead of time so it stays within them.
 
