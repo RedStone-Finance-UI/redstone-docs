@@ -132,11 +132,11 @@ const config = {
           },
           {
             from: "/docs/category/restaking-operators-avs",
-            to: "/docs/category/restaking--avs/",
+            to: "/docs/category/restaking-avs/",
           },
           {
             from: "/docs/category/-avs",
-            to: "/docs/category/restaking--avs/",
+            to: "/docs/category/restaking-avs/",
           },
           {
             from: "/docs/redstone-credora/how-to-rate-spark",

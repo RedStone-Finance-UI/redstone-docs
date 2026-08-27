@@ -29,6 +29,6 @@ An auction-based instant liquidity mechanism for RWA collateral. When a position
 
 Atom and Settle solve different parts of the same problem. Atom recovers value from DeFi-native liquidations. Settle makes RWA-backed positions liquidatable at all. Together they form the capital efficiency layer of the RedStone Stack.
 
-Both products require RedStone as the price oracle for the market they operate on. This is architectural: both depend on the oracle controlling the timing of onchain price submission, which enables atomic settlement and eliminates front-running.
+RedStone Settle can work on any market regardless of its oracle setup. However, both products work better when RedStone is the price oracle for the market they operate on. This is architectural: both depend on the oracle controlling the timing of onchain price submission, which enables atomic settlement and eliminates front-running.
 
 [Contact RedStone](https://redstone.finance/contact) to discuss integration.

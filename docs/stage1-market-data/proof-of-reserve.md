@@ -7,7 +7,7 @@ sidebar_label: "Proof of Reserve"
 
 A tokenized asset issuer claims a certain level of reserve backing. A Proof of Reserve feed makes that claim verifiable onchain, in real time, by any protocol or user who needs it.
 
-Without onchain PoR, DeFi protocols accepting a tokenized asset as collateral are relying on periodic audit reports, transparency dashboards, or issuer trust. None of these are readable by a smart contract or update fast enough for a liquidation engine.
+Without onchain PoR, DeFi protocols accepting a tokenized asset as collateral are relying on periodic audit reports or issuer trust. None of these are readable by a smart contract or update fast enough for a liquidation engine.
 
 RedStone Proof of Reserve feeds bridge that gap, taking verified reserve data from the offchain world and publishing it onchain as a cryptographically verifiable price feed.
 
@@ -19,7 +19,7 @@ Not every RWA or yield-bearing token needs a PoR feed. RedStone supports three d
 
 **Contract rate feeds** — If the asset's backing is fully onchain (example: stETH by Lido), the price can be derived directly from the asset's smart contract. No offchain attestation is required. This is the simplest and fastest integration path when applicable. Similar logic can also be applied to pricing ERC-4626 funds provided that they are composed entirely of crypto collateral (if they also include RWAs, an additional proof of reserve feed may be needed to arrive at the final price of the vault).
 
-**Proof of Reserve feeds** — For assets with offchain backing (custodied gold, T-bills, bank deposits, exchange-held collateral, fund assets), PoR feeds are the right tool. The backing exists offchain; it needs to be attested and then published onchain.
+**Off-chain attestation feeds** — For assets with offchain backing (custodied gold, T-bills, bank deposits, exchange-held collateral, fund assets), PoR feeds are the right tool. The backing exists offchain; it needs to be attested and then published onchain.
 
 **Market price feeds** — A secondary market price for an RWA token. Vulnerable to liquidity manipulation and generally not the preferred input for lending markets and risk curators assessing collateral value.
 
@@ -73,7 +73,7 @@ RedStone has built PoR and NAV feeds for:
 
 **Deviation threshold:** Onchain publication is triggered by price movement beyond a configurable threshold. For assets with irregular pricing patterns (e.g. bonds that move significantly on macro events), this ensures the feed reflects the market without unnecessary updates during stable periods.
 
-**Update frequency:** Attestation partners can provide real-time solvency data updated as frequently as every 15 minutes, including both reserves and liabilities. Onchain publication cadence is configurable.
+**Update frequency:** Attestation partners can provide solvency data updated continuously, even in real-time, including both reserves and liabilities. Onchain publication cadence is configurable.
 
 **Push model:** PoR feeds use RedStone's push architecture and are compatible with standard adapter interfaces.
 
@@ -81,7 +81,7 @@ RedStone has built PoR and NAV feeds for:
 
 ## Privacy-Preserving PoR
 
-Some assets require reserve verification while protecting sensitive underlying data, for example, a trading strategy that needs to prove NAV and exchange exposure to LPs without revealing the strategy logic or asset breakdown.
+Some assets require reserve verification while protecting sensitive underlying data — for example, a trading strategy that needs to prove NAV and exchange exposure to LPs without revealing the strategy logic or asset breakdown, or an institutional custodian that requires the highest privacy standards for its holdings.
 
 For these cases, RedStone can deploy computation inside a trusted execution environment (TEE), such as AWS Nitro Enclaves. Exchange API keys are injected into the secure enclave; calculations (NAV, P&L, exposure by exchange, long/short positions) happen inside the enclave without exposing sensitive data to any external party. The resulting attested metrics are then published onchain or delivered to a transparency dashboard.
 

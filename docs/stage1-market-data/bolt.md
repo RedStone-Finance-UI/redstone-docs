@@ -21,7 +21,7 @@ Bolt is built on two core design choices, with an optional third for integration
 
 ### 1. Direct CEX streaming
 
-Instead of polling price aggregators, Bolt nodes monitor trade activity directly on major venues (Binance, Coinbase, OKX, Bitget, Kraken) and stream the results via high-speed gateways. This eliminates the batching overhead that gives most oracles their latency floor.
+Instead of polling price aggregators, Bolt nodes monitor trade activity directly on major venues (Binance, Coinbase, OKX, Bitget, Kraken) and stream the results in real time. This eliminates the batching overhead that gives most oracles their latency floor.
 
 ### 2. Push model: no contract changes required
 
@@ -31,7 +31,7 @@ Bolt uses a push model, the same interface as any standard push feed. Protocols 
 
 ### Optional: Co-location with the sequencer
 
-For integrations where every microsecond counts, RedStone can co-locate Bolt nodes in the same physical location as the chain's sequencer. Transmission delay drops to zero, the price data is already present when the block executes. This requires additional configuration work on RedStone's side and is evaluated on a case-by-case basis. RedStone has deployed this for select chains in the past.
+For integrations where every microsecond counts, RedStone can co-locate Bolt nodes in the same physical location as the chain's sequencer. Transmission delay drops to zero, the price data is already present when the block executes. This requires additional configuration work on RedStone's side and is evaluated on a case-by-case basis. RedStone has deployed this for selected chains in the past.
 
 ---
 
@@ -51,7 +51,7 @@ To put the speed difference in context: standard Ethereum push feeds deliver ETH
 
 ## Advanced: Custom Feed Types
 
-Bolt's sub-second update cadence enables data primitives that are not possible with standard oracle architectures.
+Bolt's millisecond update cadence enables data primitives that are not possible with standard oracle architectures.
 
 For protocols that require it, RedStone can produce dedicated feeds alongside the standard price feed, including deterministic OHLC (Open/High/Low/Close) data constructed at the oracle layer as opposed to being reconstructed post-factum from snapshots. These feeds are cryptographically signed, encoded as standardized payloads, and streamed in real time, with all outputs persisted for historical access.
 

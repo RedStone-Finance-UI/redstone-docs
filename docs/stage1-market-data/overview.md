@@ -19,7 +19,7 @@ A single delivery model cannot serve all of these. RedStone's Stage 1 Stack is a
 
 ### [Push Model](./price-feeds/push-model.md)
 
-Price data stored on-chain by a relayer, updated on a configured heartbeat and deviation threshold. Compatible with the Chainlink aggregator interface. The standard integration path for lending markets, vaults, and protocols that need always-available onchain prices without modifying transaction logic.
+Price data stored on-chain by a relayer, updated on a configured heartbeat and deviation threshold. Compatible with interfaces used by the top DeFi protocols. The standard integration path for lending markets, vaults, and protocols that need always-available onchain prices without modifying transaction logic.
 
 ### [Pull Model](./price-feeds/pull-model.md)
 
@@ -27,7 +27,7 @@ Price data injected into the user's transaction at execution time. More gas-effi
 
 ### [RedStone Bolt](./bolt.md)
 
-A push oracle delivering a new price update every 10ms. Built for high-throughput blockchains where block times fall below the cadence of standard push oracles. Bolt uses the same push interface as standard push feeds, requiring no contract changes. Currently live on MegaETH and Monad.
+A push oracle delivering a new price update up to every 10ms. Built for high-throughput blockchains where block times fall below the cadence of standard push oracles. Bolt uses the same push interface as standard push feeds, requiring no contract changes. Currently live on MegaETH and Monad.
 
 ### [RedStone Live](./live/overview.md)
 
