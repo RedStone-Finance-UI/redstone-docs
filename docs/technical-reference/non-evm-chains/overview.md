@@ -21,4 +21,8 @@ A price adapter program and price feed accounts for consuming RedStone data on S
 
 A Stellar connector with Rust and TypeScript integration guides, audited by Veridise and Zellic.
 
+### [Sui](./sui/index.mdx)
+
+A Sui connector with Move and TypeScript integration guides.
+
 If you're integrating on a non-EVM chain not listed here, [contact RedStone](https://redstone.finance/contact) to discuss support.
