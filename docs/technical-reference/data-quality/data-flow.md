@@ -95,7 +95,7 @@ The system employs a hybrid distribution model combining enterprise-grade, geogr
 
 ### Relay Infrastructure
 
-The system operates a network of relay services that facilitate seamless transaction processing through automated gas fee optimization, load-balanced interaction with redundant RPC endpoints, and high-availability deployment utilizing shadow instances for maximum reliability. The infrastructure also includes third-party transaction relay services, such as Gelato, providing additional redundancy through a fallback service.
+The system operates a network of relay services that facilitate seamless transaction processing through automated gas fee optimization, load-balanced interaction with redundant RPC endpoints, and high-availability deployment utilizing shadow instances for maximum reliability. The infrastructure also includes third-party transaction relay services, providing additional redundancy through a fallback service.
 
 ## Data Verification
 
