@@ -27,9 +27,16 @@ Use the following dependency to embed the _RedStone Sui Connector_ into TypeScri
 Reads go through `SuiContractAdapter`, which wraps a [`SuiPricesContractReader`](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/sui-connector/src/adapter/SuiPricesContractReader.ts) pointed at the deployed `PriceAdapter` object:
 
 ```ts
-import { SuiClientBuilder, SuiContractAdapter, readSuiConfig } from "@redstone-finance/sui-connector";
+import {
+  SuiClientBuilder,
+  SuiContractAdapter,
+  readSuiConfig,
+} from "@redstone-finance/sui-connector";
 
-const suiClient = new SuiClientBuilder().withSuiNetwork(network).withRpcUrls(rpcUrls).build();
+const suiClient = new SuiClientBuilder()
+  .withSuiNetwork(network)
+  .withRpcUrls(rpcUrls)
+  .build();
 
 const adapter = new SuiContractAdapter(suiClient, readSuiConfig(network));
 
@@ -50,7 +57,11 @@ Two things the snippet above glosses over, both of which matter to get a working
 A minimal script that connects to mainnet and reads the BTC and ETH prices:
 
 ```ts
-import { SuiClientBuilder, SuiContractAdapter, readSuiConfig } from "@redstone-finance/sui-connector";
+import {
+  SuiClientBuilder,
+  SuiContractAdapter,
+  readSuiConfig,
+} from "@redstone-finance/sui-connector";
 
 const NETWORK = "mainnet";
 // #type=grpc forces the gRPC client — the JSON-RPC path is deprecated on public fullnodes
