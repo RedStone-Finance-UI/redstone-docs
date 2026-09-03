@@ -97,7 +97,7 @@ DEPLOY_DIR="sui/deployments/suiMultiFeed/price_adapter" yarn tsx read-prices.ts
 
 This returns the raw on-chain values (`lastValue` is `u256`, 8 decimals — divide by `1e8`), for example:
 
-```
+```text
 {
   BTC: { lastDataPackageTimestampMS: ..., lastBlockTimestampMS: ..., lastValue: 7935541000000n },
   ETH: { lastDataPackageTimestampMS: ..., lastBlockTimestampMS: ..., lastValue: 248793355693n }
