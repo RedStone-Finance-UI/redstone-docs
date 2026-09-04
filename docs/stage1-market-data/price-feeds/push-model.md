@@ -35,8 +35,6 @@ The relayer is a service that works in a customizable way based on [environment 
 
 - a `value-deviation` condition described by `MIN_DEVIATION_PERCENTAGE` variable which indicates how much value should change in order to trigger the price update, [code](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/on-chain-relayer/src/core/update-conditions/value-deviation-condition.ts).
 
-
-
 ### Contracts
 
 The on-chain relayer is based on the [PriceFeedsAdapter contract](https://github.com/redstone-finance/redstone-oracles-monorepo/blob/main/packages/on-chain-relayer/contracts/core/RedstoneAdapterBase.sol) which is responsible for:
