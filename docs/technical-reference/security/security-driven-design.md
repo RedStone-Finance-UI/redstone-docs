@@ -27,4 +27,4 @@ Data transmission reliability is achieved through a four-redundant distribution 
 
 ## Failover System Architecture
 
-On-chain data submission implements a multi-tiered failover system to maintain operational continuity. The primary relay network operates in conjunction with a shadow network that activates automatically upon detection of performance degradation. Additional resilience is provided through integration with third-party relay services such as Gelato. The system's trustless architecture enables permissionless operation by external entities utilizing public data submission protocols as an ultimate failover mechanism.
+On-chain data submission implements a multi-tiered failover system to maintain operational continuity. The primary relay network operates in conjunction with a shadow network that activates automatically upon detection of performance degradation. Additional resilience is provided through integration with third-party relay services. The system's trustless architecture enables permissionless operation by external entities utilizing public data submission protocols as an ultimate failover mechanism.
